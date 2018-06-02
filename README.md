@@ -10,3 +10,6 @@ Nesta versão do Projeto F1 usamos:
 * [Interface gráfica em Swing](https://docs.oracle.com/javase/6/docs/technotes/guides/swing/)
 * Padrão de Conexão com o banco de dados [JDBC API](http://www.oracle.com/technetwork/java/overview-141217.html)
 * Banco de Dados [MySQL](https://www.mysql.com)
+
+## Instalação
+* Execute o [script SQL](https://github.com/andreschwerz/f1-java-swing-jdbc/blob/master/src/dao/sql.sql) 
