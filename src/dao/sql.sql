@@ -1,7 +1,8 @@
 /**
  * Author:  André Luis Schwerz
  */
-
+DROP TABLE IF EXISTS PROVA;
+DROP TABLE IF EXISTS CIRCUITO;
 DROP TABLE IF EXISTS PILOTO;
 DROP TABLE IF EXISTS EQUIPE;
 DROP TABLE IF EXISTS PAIS;
@@ -23,7 +24,7 @@ CREATE TABLE EQUIPE(
 );
 
 CREATE TABLE PILOTO(
-	id INTEGER AUTO_INCREMENT,
+    id INTEGER AUTO_INCREMENT,
     nome VARCHAR(100),
     pais_sigla CHAR(3),
     equipe_id INTEGER,
@@ -33,8 +34,62 @@ CREATE TABLE PILOTO(
     CONSTRAINT fk_equipe_piloto FOREIGN KEY(equipe_id) REFERENCES EQUIPE(id)
 );
 
+CREATE TABLE CIRCUITO(
+    nome VARCHAR(100),
+    pais_sigla CHAR(3), 
+    status BOOLEAN, 
+    cidade VARCHAR(100), 
+    estilo ENUM('Pista', 'Estrada', 'Circuito de Rua', 'Pista/Estrada', 'Hibrido'),
+    CONSTRAINT pk_circuito PRIMARY KEY(nome),
+    CONSTRAINT fk_pais_circuito FOREIGN KEY(pais_sigla) REFERENCES PAIS(sigla)
+);
+
+CREATE TABLE PROVA(
+   gp VARCHAR(100),
+   data DATE,
+   circuito_nome VARCHAR(100),
+   CONSTRAINT pk_prova PRIMARY KEY(gp, data),
+   CONSTRAINT fk_circuito_prova FOREIGN KEY(circuito_nome ) REFERENCES CIRCUITO(nome)
+);
  
-INSERT INTO PAIS(sigla, nome) VALUES ('AUS','Austrália'), ('AUT','Áustria'), ('BEL','Bélgica'), ('BRA','Brasil'), ('CAN','Canadá'), ('CHI','Chile'), ('DEN','Dinamarca'), ('ESP','Espanha'), ('FIN','Finlândia'), ('FRA','França'), ('GBR','Grã-Bretanha'), ('GER','Alemanha'), ('IND', 'Índia'), ('ITA', 'Itália'), ('MEX', 'México'), ('MON', 'Mónaco'), ('NED', 'Países Baixos'), ('NZL', 'Nova Zelândia'), ('RUS', 'Rússia'), ('SUI', 'Suíça'), ('SWE', 'Suécia'), ('USA','Estados Unidos');
+INSERT INTO PAIS(sigla, nome) VALUES 
+('ZAF', 'África do Sul'),
+('GER', 'Alemanha'),
+('ARG', 'Argentina'),
+('AUS', 'Austrália'), 
+('AUT', 'Áustria'), 
+('AZE', 'Azerbaijão'), 
+('BHR', 'Bahrein'), 
+('BEL', 'Bélgica'), 
+('BRA', 'Brasil'), 
+('CAN', 'Canadá'), 
+('CHI', 'Chile'), 
+('CHN', 'China'), 
+('KOR', 'Coreia do Sul'),
+('DEN', 'Dinamarca'),
+('ARE', 'Emirados Árabes Unidos'),  
+('ESP', 'Espanha'), 
+('FIN', 'Finlândia'), 
+('FRA', 'França'), 
+('GBR', 'Grã-Bretanha'), 
+('HUN', 'Hungria'),
+('IND', 'Índia'), 
+('ITA', 'Itália'), 
+('JPN', 'Japão'),
+('MAR', 'Marrocos'),
+('MYS', 'Malásia'),
+('MEX', 'México'), 
+('MON', 'Mônaco'), 
+('NED', 'Países Baixos'), 
+('NZL', 'Nova Zelândia'),
+('PRT', 'Portugal'),
+('RUS', 'Rússia'), 
+('SGP', 'Singapura'), 
+('SUI', 'Suíça'), 
+('SWE', 'Suécia'), 
+('TUR', 'Turquia'),
+('USA','Estados Unidos');
+
 INSERT INTO EQUIPE(nome, diretor, pais_sigla, status) VALUES 
 ('Scuderia Ferrari',                 '','ITA',1), 
 ('Sahara Force India F1 Team',       '','IND',1), 
@@ -46,6 +101,7 @@ INSERT INTO EQUIPE(nome, diretor, pais_sigla, status) VALUES
 ('Alfa Romeo Sauber F1 Team',        '','SUI',1), 
 ('Red Bull Toro Rosso Honda',        '','ITA',1), 
 ('Williams Martini Racing',          '','GBR',1);
+
 INSERT INTO PILOTO(nome, pais_sigla, equipe_id, status) VALUES
 ('Sebastian Vettel' ,'GER',1,1), 
 ('Kimi Räikkönen'   ,'FIN',1,1), 
@@ -67,3 +123,122 @@ INSERT INTO PILOTO(nome, pais_sigla, equipe_id, status) VALUES
 ('Brendon Hartley'  ,'NZL',9,1), 
 ('Lance Stroll'     ,'CAN',10,1), 
 ('Sergey Sirotkin'  ,'RUS',10,1);
+
+INSERT INTO CIRCUITO (nome, pais_sigla, estilo, cidade, status) VALUES 
+('Red Bull Ring',                        'AUT', 'Pista',           'Spielberg',    1),
+('Adelaide Street Circuit',        'AUS', 'Pista',           'Adelaide',     0),
+('Ain-Diab',                       'MAR', 'Estrada',	     'Casablanca',   0),
+('Aintree',                        'GBR', 'Estrada',         'Liverpool',    0),
+('Circuito de Albert Park',                    'AUS', 'Circuito de Rua', 'Melbourne',    1),
+('Circuito das Américas',          'USA', 'Pista',           'Austin',       1),
+('AVUS',                           'GER', 'Circuito de Rua', 'Berlim',       0),
+('Circuito Internacional do Bahrein', 'BHR', 'Pista',           'Sakhir',       1),
+('Circuito da Boavista',           'PRT', 'Circuito de Rua', 'Porto',        0),
+('Brands Hatch',                   'GBR', 'Pista',           'Kent',         0),
+('Circuit Bremgarten',             'SUI', 'Pista',           'Bremgarten',   0),
+('Circuito Internacional de Buddh','IND', 'Pista',           'Greater Noida',0),
+('Bugatti Circuit',                'FRA', 'Pista',	     'Le Mans',      0),
+('Circuito Urbano de Baku',              'AZE', 'Circuito de Rua', 'Baku',         1),
+('Caesars Palace',                 'USA', 'Circuito de Rua', 'Las Vegas',    0),
+('Circuito da Catalunha',           'ESP', 'Pista',           'Barcelona',    1),
+('Circuit Charade',                'FRA', 'Estrada',         'Clermont-Ferrand', 0),
+('Detroit',                        'USA', 'Circuito de Rua', 'Detroit',      0),
+('Dijon-Prenois' ,                 'FRA', 'Pista',	     'Dijon',        0),
+('Donington Park',                 'GBR', 'Pista',           'Leicestershire', 0),
+('Autodromo Enzo e Dino Ferrari',  'ITA', 'Pista',           'Ímola',        0),
+('Autódromo do Estoril',           'PRT', 'Pista',           'Estoril',      0),
+('Fair Park',                      'USA', 'Circuito de Rua', 'Dallas',       0),
+('Fuji Speedway',                  'JPN', 'Pista',           'Shizuoka',     0),
+('Circuito Gilles Villeneuve',      'CAN', 'Pista/Estrada',   'Montreal',     1),
+('Autódromo Hermanos Rodríguez',   'MEX', 'Pista',           'Cidade do México', 1),
+('Hockenheimring',                 'GER', 'Pista/Estrada',   'Hockenheim',   1),
+('Hungaroring',                    'HUN', 'Pista',           'Budapeste',    1),
+('Indianapolis Motor Speedway',    'USA', 'Pista',           'Indianápolis', 0),
+('Istanbul Park',                  'TUR', 'Pista',           'Istambul',     0),
+('Autódromo de Interlagos',                     'BRA', 'Pista',           'São Paulo',    1),
+('Autódromo Internacional Nelson Piquet Jacarepaguá', 'BRA', 'Pista','Rio de Janeiro', 0),
+('Circuito Permanente Del Jarama', 'ESP', 'Pista',           'Jarama',       0),
+('Circuito Permanente de Jerez',   'ESP', 'Pista',           'Jerez de la Frontera',0),
+('Korean International Circuit',   'KOR', 'Circuito de Rua', 'Yeongam County',0),
+('Kyalami Circuit',                'ZAF', 'Pista',           'Kyalami',0),
+('Long Beach',                     'USA', 'Circuito de rua', 'Long Beach',0),
+('Magny-Cours Circuit',            'FRA', 'Pista',           'Nevers',0),
+('Circuito Urbano de Marina Bay',  'SGP', 'Circuito de Rua', 'Singapura',1),
+('Monsanto Park',                  'PRT', 'Circuito de rua', 'Lisboa', 0),
+('Circuito de Mônaco',             'MON', 'Circuito de rua', 'Monte Carlo', 1),
+('Montjuïch',                      'ESP', 'Circuito de rua', 'Barcelona', 0),
+('Circuit Mont-Tremblant',         'CAN', 'Pista',           'Saint-Jovite', 0),
+('Autódromo Nacional de Monza',      'ITA', 'Pista',           'Monza',1),
+('Mosport Park',                   'CAN', 'Pista',           'Bowmanville',0),
+('Nivelles-Baulers Circuit',       'BEL', 'Pista',           'Nivelles',0),
+('Nürburgring',                    'GER', 'Pista',           'Nürburg',0),
+('Autódromo Oscar Alfredo Gálvez', 'ARG', 'Pista',           'Buenos Aires',0),
+('Österreichring',                 'AUT', 'Pista',           'Zeltweg',0),
+('Circuito Paul Ricard',            'FRA', 'Pista',           'Castellet',1),
+('Pedralbes Circuit',              'ESP', 'Circuito de rua', 'Barcelona',0),
+('Pescara Circuit',                'ITA', 'Pista',           'Pescara',0),
+('Phoenix Street Circuit',         'USA', 'Circuito de rua', 'Phoenix',0),
+('Prince George Circuit',          'ZAF', 'Pista',           'East London',0),
+('Reims-Gueux',                    'FRA', 'Pista',           'Reims',0),
+('Riverside International Raceway','USA', 'Pista',           'Riverside',0),
+('Rouen-Les-Essarts',              'FRA', 'Pista',           'Rouen',0),
+('Scandinavian Raceway',           'SWE', 'Pista',           'Anderstorp',0),
+('Sebring Raceway',                'USA', 'Pista',           'Sebring',0),
+('Circuito Internacional de Sepang','MYS', 'Pista',           'Kuala Lumpur',0),
+('Circuito Internacional de Xangai', 'CHN', 'Pista',           'Shanghai',1),
+('Circuito de Silverstone ',       'GBR', 'Pista',           'Silverstone',1),
+('Autódromo de Sóchi',              'RUS', 'Pista',           'Sóchi',1),
+('Spa-Francorchamps',              'BEL', 'Pista',           'Stavelot-Malmedy',1),
+('Circuito de Suzuka',             'JPN', 'Pista',           'Suzuka',1),
+('Tanaka International Circuit',   'JPN', 'Pista',           'Aida',0),
+('Circuito Urbano de Valência',    'ESP', 'Circuito de rua', 'Valência',0),
+('Watkins Glen',                   'USA', 'Pista',           'Watkins Glen',0),
+('Circuito de Yas Marina',         'ARE', 'Hibrido',         'Abu Dhabi',1),
+('Circuit Park Zandvoort',         'NED', 'Pista',           'Zandvoort',0),
+('Zeltweg Airfield',               'AUT', 'Pista',           'Zeltweg',0),
+('Circuit Zolder',                 'BEL', 'Pista',           'Heusden-Zolder',0);
+
+
+INSERT INTO PROVA (gp, circuito_nome, data) VALUES
+('Grande Prêmio da Austrália',       'Circuito de Albert Park',           '2018-03-25'),
+('Grande Prêmio do Bahrein',         'Circuito Internacional do Bahrein', '2018-04-08'),
+('Grande Prêmio da China',           'Circuito Internacional de Xangai',  '2018-04-15'),
+('Grande Prêmio do Azerbaijão',      'Circuito Urbano de Baku',           '2018-04-29'),
+('Grande Prêmio da Espanha',         'Circuito da Catalunha',             '2018-05-13'),
+('Grande Prêmio de Mônaco',          'Circuito de Mônaco',                '2018-05-27'),
+('Grande Prêmio do Canadá',          'Circuito Gilles Villeneuve',        '2018-06-10'),
+('Grande Prêmio da França',          'Circuito Paul Ricard',              '2018-06-24'), 
+('Grande Prêmio da Áustria',         'Red Bull Ring',                     '2018-07-01'),
+('Grande Prêmio da Grã-Bretanha',    'Circuito de Silverstone',           '2018-07-08'),
+('Grande Prêmio da Alemanha',        'Hockenheimring',                    '2018-07-22'),
+('Grande Prêmio da Hungria',         'Hungaroring',                       '2018-07-29'),
+('Grande Prêmio da Bélgica',         'Spa-Francorchamps',                 '2018-08-26'),
+('Grande Prêmio da Itália',          'Autódromo Nacional de Monza',       '2018-09-02'),
+('Grande Prêmio de Singapura',       'Circuito Urbano de Marina Bay',     '2018-09-16'),
+('Grande Prêmio da Rússia',          'Autódromo de Sóchi',                '2018-09-30'),
+('Grande Prêmio do Japão',           'Circuito de Suzuka',                '2018-10-07'),
+('Grande Prêmio dos Estados Unidos', 'Circuito das Américas',             '2018-10-21'),
+('Grande Prêmio do México',          'Autódromo Hermanos Rodríguez',      '2018-10-28'),
+('Grande Prêmio do Brasil',          'Autódromo de Interlagos',           '2018-11-11'),
+('Grande Prêmio de Abu Dhabi',       'Circuito de Yas Marina',            '2018-11-25'),
+
+('Grande Prêmio da Austrália',       'Circuito de Albert Park',           '2017-03-26'),
+('Grande Prêmio da China',           'Circuito Internacional de Xangai',  '2017-04-09'),
+('Grande Prêmio do Bahrein',         'Circuito Internacional do Bahrein', '2017-04-16'),
+('Grande Prêmio da Rússia',          'Autódromo de Sóchi',                '2017-04-30'),
+('Grande Prêmio da Espanha',         'Circuito da Catalunha',             '2017-05-14'),
+('Grande Prêmio de Mônaco',          'Circuito de Mônaco',                '2017-05-28'),
+('Grande Prêmio do Canadá',          'Circuito Gilles Villeneuve',        '2017-06-11'),
+('Grande Prêmio do Azerbaijão',      'Circuito Urbano de Baku',           '2017-06-25'),
+('Grande Prêmio da Áustria',         'Red Bull Ring',                     '2017-07-09'),
+('Grande Prêmio da Grã-Bretanha',    'Circuito de Silverstone',           '2017-07-16'),
+('Grande Prêmio da Hungria',         'Hungaroring',                       '2017-07-30'),
+('Grande Prêmio da Bélgica',         'Spa-Francorchamps',                 '2017-08-27'),
+('Grande Prêmio da Itália',          'Autódromo Nacional de Monza',       '2017-09-03'),
+('Grande Prêmio de Singapura',       'Circuito Urbano de Marina Bay',     '2017-09-17'),
+('Grande Prêmio da Malásia',         'Circuito Internacional de Sepang',  '2017-10-01'),
+('Grande Prêmio do Japão',           'Circuito de Suzuka',                '2017-10-08'),
+('Grande Prêmio dos Estados Unidos', 'Circuito das Américas',             '2017-10-22'),
+('Grande Prêmio do México',          'Autódromo Hermanos Rodríguez',      '2017-10-29'),
+('Grande Prêmio do Brasil',          'Autódromo de Interlagos',           '2017-11-12'),
+('Grande Prêmio de Abu Dhabi',       'Circuito de Yas Marina',            '2017-11-26');
