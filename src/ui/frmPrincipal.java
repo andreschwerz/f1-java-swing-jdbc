@@ -31,10 +31,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnEquipes = new javax.swing.JButton();
         btnPaises = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnProvas = new javax.swing.JButton();
+        btnPilotos = new javax.swing.JButton();
+        btnCircuitos = new javax.swing.JButton();
+        btnClassificacao = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
@@ -58,23 +58,28 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("CORRIDA");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnProvas.setText("PROVAS");
+        btnProvas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnProvasActionPerformed(evt);
             }
         });
 
-        jButton7.setText("PILOTOS");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnPilotos.setText("PILOTOS");
+        btnPilotos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnPilotosActionPerformed(evt);
             }
         });
 
-        jButton9.setText("CIRCUITOS");
+        btnCircuitos.setText("CIRCUITOS");
+        btnCircuitos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCircuitosActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("USUÁRIO");
+        btnClassificacao.setText("CLASSIFICAÇÃO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,17 +89,17 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addGap(103, 103, 103)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPilotos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnProvas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnClassificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnPaises, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEquipes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCircuitos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,12 +109,12 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEquipes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPaises, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCircuitos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPilotos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProvas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClassificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -151,9 +156,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         form.setVisible(true);        
     }//GEN-LAST:event_btnEquipesActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void btnProvasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProvasActionPerformed
+        ProvaJDialog form = new ProvaJDialog(null, true);
+        form.setLocationRelativeTo(null);
+        form.setVisible(true);  
+    }//GEN-LAST:event_btnProvasActionPerformed
 
     private void btnPaisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaisesActionPerformed
         PaisJDialog form = new PaisJDialog(null, true);
@@ -161,20 +168,26 @@ public class frmPrincipal extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_btnPaisesActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnPilotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilotosActionPerformed
         PilotoJDialog form = new PilotoJDialog(null, true);
         form.setLocationRelativeTo(null);
         form.setVisible(true);
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnPilotosActionPerformed
+
+    private void btnCircuitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCircuitosActionPerformed
+        CircuitoJDialog form = new CircuitoJDialog(null, true);
+        form.setLocationRelativeTo(null);
+        form.setVisible(true);            // TODO add your handling code here:
+    }//GEN-LAST:event_btnCircuitosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCircuitos;
+    private javax.swing.JButton btnClassificacao;
     private javax.swing.JButton btnEquipes;
     private javax.swing.JButton btnPaises;
+    private javax.swing.JButton btnPilotos;
+    private javax.swing.JButton btnProvas;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

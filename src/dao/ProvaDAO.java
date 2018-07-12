@@ -3,6 +3,7 @@ package dao;
 import model.Prova;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,53 +18,49 @@ import java.util.List;
 public class ProvaDAO extends DbConnection {
 
     private Connection conn;
-    private final String sqlInsert = "INSERT INTO Prova(circuito_id, gp, data, duracao, numvoltas, extensao) VALUES (?,?,?,?,?,?)";
-    private final String sqlUpdate = "UPDATE Prova SET circuito_id= ?, gp= ?, data= ?, duracao= ? , numvoltas= ?, extensao= ? WHERE id = ?";
-    private final String sqlRemove = "DELETE FROM Prova WHERE id = ?";
-    private final String sqlList = "SELECT id, circuito_id, gp, data, duracao, numvoltas, extensao FROM Prova ORDER BY data desc";
-    private final String sqlFind = "SELECT id, circuito_id, gp, data, duracao, numvoltas, extensao FROM Prova WHERE id = ?";
+    private final String sqlInsert = "INSERT INTO Prova(circuito_nome, gp, data) VALUES (?,?,?)";
+    private final String sqlUpdate = "UPDATE Prova SET circuito_nome= ?, gp= ?, data= ? WHERE gp = ? and data=?";
+    private final String sqlRemove = "DELETE FROM Prova WHERE gp = ? and data=?";
+    private final String sqlList = "SELECT circuito_nome, gp, data FROM Prova ORDER BY data desc";
+    private final String sqlFind = "SELECT circuito_nome, gp, data FROM Prova WHERE gp = ? and data=?";
 
     public void insert(Prova prova) throws SQLException {
         PreparedStatement ps = null;
         try {
             conn = connect();
             ps = conn.prepareStatement(sqlInsert);
-            ps.setInt(1, prova.getCircuito().getId());
+            ps.setString(1, prova.getCircuito().getNome());
             ps.setString(2, prova.getGp());
-            ps.setString(3, prova.getDataMySQL());
-            ps.setTime(4, prova.getDuracao());
-            ps.setInt(5, prova.getNumVoltas());
-            ps.setInt(6, prova.getExtensao());
+            ps.setDate(3, prova.getData());
             ps.execute();
         } finally {
             ps.close();
         }
     }
 
-    public void update(Prova prova) throws SQLException {
+    public void update(Prova prova, String gp, java.sql.Date data) throws SQLException {
         PreparedStatement ps = null;
         try {
             conn = connect();
             ps = conn.prepareStatement(sqlUpdate);
-            ps.setInt(1, prova.getCircuito().getId());
+            ps.setString(1, prova.getCircuito().getNome());
             ps.setString(2, prova.getGp());
-            ps.setString(3, prova.getDataMySQL());
-            ps.setTime(4, prova.getDuracao());
-            ps.setInt(5, prova.getNumVoltas());
-            ps.setInt(6, prova.getExtensao());
-            ps.setInt(7, prova.getId());
+            ps.setDate(3, prova.getData());
+            ps.setString(4, gp);
+            ps.setDate(5, data);
             ps.execute();
         } finally {
             ps.close();
         }
     }
 
-    public void remove(int id) throws SQLException {
+    public void remove(String gp, java.sql.Date data) throws SQLException {
         PreparedStatement ps = null;
         try {
             conn = connect();
             ps = conn.prepareStatement(sqlRemove);
-            ps.setInt(1, id);
+            ps.setString(1, gp);
+            ps.setDate(2, data);
             ps.execute();
         } finally {
             ps.close();
@@ -82,13 +79,9 @@ public class ProvaDAO extends DbConnection {
             CircuitoDAO circuitoDao = new CircuitoDAO();
             while (rs.next()) {
                 prova = new Prova();
-                prova.setId(rs.getInt("id"));
-                prova.setCircuito(circuitoDao.Find(rs.getInt("circuito_id")));
+                prova.setCircuito(circuitoDao.find(rs.getString("circuito_nome")));
                 prova.setGp(rs.getString("gp"));
-                prova.setDataMySQL(rs.getString("data"));
-                prova.setDuracao(rs.getTime("duracao"));
-                prova.setExtensao(rs.getInt("extensao"));
-                prova.setNumVoltas(rs.getInt("numvoltas"));
+                prova.setData(rs.getDate("data"));
                 list.add(prova);
             }
             return list;
@@ -98,24 +91,22 @@ public class ProvaDAO extends DbConnection {
         }
     }
 
-    public Prova find(int id) throws SQLException, ClassNotFoundException, ParseException, IOException {
+    public Prova find(String gp, java.sql.Date data) throws SQLException, ClassNotFoundException, ParseException, IOException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             ps = conn.prepareStatement(sqlFind);
-            ps.setInt(1, id);
+            ps.setString(1, gp);
+            ps.setDate(1, data);
             rs = ps.executeQuery();
             Prova prova = new Prova();
             CircuitoDAO circuitoDao = new CircuitoDAO();
 
             if (rs.next()) {
-                prova.setId(rs.getInt("id"));
-                prova.setCircuito(circuitoDao.Find(rs.getInt("circuito_id")));
+                prova = new Prova();
+                prova.setCircuito(circuitoDao.find(rs.getString("circuito_nome")));
                 prova.setGp(rs.getString("gp"));
-                prova.setDataMySQL(rs.getString("data"));
-                prova.setDuracao(rs.getTime("duracao"));
-                prova.setExtensao(rs.getInt("extensao"));
-                prova.setNumVoltas(rs.getInt("numvoltas"));
+                prova.setData(rs.getDate("data"));
             }
             return prova;
         } finally {

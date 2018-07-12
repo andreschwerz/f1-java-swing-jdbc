@@ -70,18 +70,18 @@
                   <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jButton7" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnPilotos" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton6" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnProvas" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton5" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnClassificacao" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="btnPaises" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnEquipes" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton9" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnCircuitos" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="115" max="32767" attributes="0"/>
@@ -95,13 +95,13 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnEquipes" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="btnPaises" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="jButton9" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnCircuitos" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton7" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="jButton6" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnPilotos" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnProvas" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnClassificacao" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
               </Group>
@@ -125,30 +125,33 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPaisesActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton6">
+        <Component class="javax.swing.JButton" name="btnProvas">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CORRIDA"/>
+            <Property name="text" type="java.lang.String" value="PROVAS"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProvasActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton7">
+        <Component class="javax.swing.JButton" name="btnPilotos">
           <Properties>
             <Property name="text" type="java.lang.String" value="PILOTOS"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPilotosActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton9">
+        <Component class="javax.swing.JButton" name="btnCircuitos">
           <Properties>
             <Property name="text" type="java.lang.String" value="CIRCUITOS"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCircuitosActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="btnClassificacao">
           <Properties>
-            <Property name="text" type="java.lang.String" value="USU&#xc1;RIO"/>
+            <Property name="text" type="java.lang.String" value="CLASSIFICA&#xc7;&#xc3;O"/>
           </Properties>
         </Component>
       </SubComponents>

@@ -2,7 +2,6 @@ package dao;
 
 import model.Circuito;
 import java.io.IOException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,11 +14,10 @@ import java.util.ArrayList;
 public class CircuitoDAO extends DbConnection{
     private Connection conn;
     private final String sqlInsert  = "INSERT INTO Circuito(pais_sigla, nome, status, cidade, estilo) VALUES (?,?,?,?,?)";
-    private final String sqlUpdate  = "UPDATE Circuito SET pais_sigla= ?, nome = ?, status = ?, cidade= ?, estilo=?  WHERE id = ? ";
-    private final String sqlRemove  = "DELETE FROM Circuito WHERE id = ?";
-    private final String sqlList    = "SELECT id, pais_sigla, nome, status, cidade, estilo FROM Circuito ORDER BY Circuito.nome";
-    private final String sqlFind    = "SELECT id, pais_sigla, nome, status, cidade, estilo FROM Circuito WHERE id = ?";
-
+    private final String sqlUpdate  = "UPDATE Circuito SET pais_sigla= ?, nome=?, status = ?, cidade= ?, estilo=?  WHERE nome = ? ";
+    private final String sqlRemove  = "DELETE FROM Circuito WHERE nome = ?";
+    private final String sqlList    = "SELECT pais_sigla, nome, status, cidade, estilo FROM Circuito ORDER BY Circuito.nome";
+    private final String sqlFind    = "SELECT pais_sigla, nome, status, cidade, estilo FROM Circuito WHERE nome = ?";
 
     public void insert(Circuito circuito) throws SQLException{
         PreparedStatement ps = null;
@@ -39,7 +37,7 @@ public class CircuitoDAO extends DbConnection{
         }
     }
 
-    public void update(Circuito circuito) throws SQLException{
+    public void update(Circuito circuito, String nome) throws SQLException{
         PreparedStatement ps = null;
         try{
             conn = connect();
@@ -49,7 +47,7 @@ public class CircuitoDAO extends DbConnection{
             ps.setBoolean(3, circuito.isStatus());
             ps.setString(4, circuito.getCidade());
             ps.setString(5, circuito.getEstilo());
-            ps.setInt(6, circuito.getId());
+            ps.setString(6, nome);
 
             ps.execute();
         }
@@ -58,12 +56,12 @@ public class CircuitoDAO extends DbConnection{
             conn.close();
         }
     }
-    public void remove(int id) throws SQLException{
+    public void remove(String nome) throws SQLException{
         PreparedStatement ps = null;
         try{
             conn = connect();
             ps = conn.prepareStatement(sqlRemove);
-            ps.setInt(1, id);
+            ps.setString(1, nome);
             ps.execute();
         }
         finally{
@@ -84,7 +82,7 @@ public class CircuitoDAO extends DbConnection{
             PaisDAO paisDao = new PaisDAO();
             while (rs.next()){
                 circuito = new Circuito();
-                circuito.setId(rs.getInt("id"));
+              
                 circuito.setPais(paisDao.find(rs.getString("pais_sigla")));
                 circuito.setNome(rs.getString("nome"));
                 circuito.setStatus(rs.getBoolean("status"));
@@ -102,20 +100,20 @@ public class CircuitoDAO extends DbConnection{
         }
     }
 
-    public Circuito Find(int id)throws SQLException, ClassNotFoundException, IOException{
+    public Circuito find(String nome)throws SQLException, ClassNotFoundException, IOException{
         PreparedStatement ps = null;
         ResultSet rs = null;
         try{
             conn = connect();
             ps = conn.prepareStatement(sqlFind);
-            ps.setInt(1, id);
+            ps.setString(1, nome);
 
             rs = ps.executeQuery();
             Circuito circuito = null ;
             PaisDAO paisDao = new PaisDAO();
             if (rs.next()){
                 circuito = new Circuito();
-                circuito.setId(rs.getInt("id"));
+               
                 circuito.setPais(paisDao.find(rs.getString("pais_sigla")));
                 circuito.setNome(rs.getString("nome"));
                 circuito.setStatus(rs.getBoolean("status"));

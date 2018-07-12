@@ -38,6 +38,9 @@ public class ResultSetTableModel extends AbstractTableModel {
     public Class getColumnClass(int column) throws IllegalStateException {
         try {
             String className = metaData.getColumnClassName(column + 1);
+            /*if (className.equals("java.sql.Date")){
+                className = "java.util.Date.class";
+            }*/
             return Class.forName(className);
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println(ex.getMessage());

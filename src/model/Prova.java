@@ -1,10 +1,10 @@
 package model;
 
-import java.sql.Time;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -12,13 +12,9 @@ import java.util.Date;
  */
 public class Prova {
 
-    private int id;
     private String gp;
     private Circuito circuito;
     private Date data;
-    private Time duracao;
-    private int numVoltas;
-    private int extensao;
 
     public Circuito getCircuito() {
         return circuito;
@@ -64,30 +60,7 @@ public class Prova {
 
     public void setDataMySQL(String data) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        this.data = (Date) format.parse(data);
-    }
-
-    public Time getDuracao() {
-        return duracao;
-    }
-
-    public void setDuracao(Time duracao) {
-        this.duracao = duracao;
-    }
-
-    public void setDuracao(String duracao) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-        format.setLenient(false);
-        format.parse(duracao);
-        this.duracao = Time.valueOf(duracao);
-    }
-
-    public int getExtensao() {
-        return extensao;
-    }
-
-    public void setExtensao(int extensao) {
-        this.extensao = extensao;
+        this.data =  new java.sql.Date(format.parse(data).getTime()); 
     }
 
     public String getGp() {
@@ -96,21 +69,5 @@ public class Prova {
 
     public void setGp(String gp) {
         this.gp = gp;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getNumVoltas() {
-        return numVoltas;
-    }
-
-    public void setNumVoltas(int numVoltas) {
-        this.numVoltas = numVoltas;
     }
 }

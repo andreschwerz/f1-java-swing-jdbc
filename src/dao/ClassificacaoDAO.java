@@ -29,7 +29,7 @@ public class ClassificacaoDAO extends DbConnection {
             ps = conn.prepareStatement(sqlInsert);
             ps.setInt(1, posPilProva.getPiloto().getId());
             ps.setInt(2, posPilProva.getEquipe().getId());
-            ps.setInt(3, posPilProva.getProva().getId());
+            //ps.setInt(3, posPilProva.getProva().getId());
             ps.setTime(4, posPilProva.getTempo());
             ps.execute();
         } finally {
@@ -45,7 +45,7 @@ public class ClassificacaoDAO extends DbConnection {
             ps = conn.prepareStatement(sqlRemove);
             ps.setInt(1, posPilProva.getPiloto().getId());
             ps.setInt(2, posPilProva.getEquipe().getId());
-            ps.setInt(3, posPilProva.getProva().getId());
+           // ps.setInt(3, posPilProva.getProva().getId());
             ps.execute();
         } finally {
             ps.close();
@@ -72,7 +72,7 @@ public class ClassificacaoDAO extends DbConnection {
 
                 classificacao.setPiloto(pilotoDAO.find(rs.getInt("piloto_id")));
                 classificacao.setEquipe(equipeDao.find(rs.getInt("equipe_id")));
-                classificacao.setProva(provaDao.find(rs.getInt("prova_id")));
+             //   classificacao.setProva(provaDao.find(rs.getInt("prova_id")));
                 classificacao.setTempo(rs.getTime("tempo"));
                 list.add(classificacao);
             }
@@ -93,7 +93,7 @@ public class ClassificacaoDAO extends DbConnection {
 
             ps.setInt(1, piloto.getId());
             ps.setInt(2, equipe.getId());
-            ps.setInt(3, prova.getId());
+          //  ps.setInt(3, prova.getId());
 
             rs = ps.executeQuery();
 
@@ -107,7 +107,7 @@ public class ClassificacaoDAO extends DbConnection {
                 classificacao = new Classificacao();
                 classificacao.setPiloto(pilotoDAO.find(rs.getInt("piloto_id")));
                 classificacao.setEquipe(equipeDao.find(rs.getInt("equipe_id")));
-                classificacao.setProva(provaDao.find(rs.getInt("prova_id")));
+               // classificacao.setProva(provaDao.find(rs.getInt("prova_id")));
                 classificacao.setTempo(rs.getTime("tempo"));
             }
             return classificacao;

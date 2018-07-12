@@ -6,7 +6,6 @@ package model;
  */
 public class Circuito {
 
-    private int id;
     private Pais pais;
     private String nome;
     private boolean status;
@@ -27,14 +26,6 @@ public class Circuito {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
